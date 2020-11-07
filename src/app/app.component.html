@@ -4,17 +4,17 @@
     <label for="department">Choose my department: </label>
     <input type="checkbox" id="department" name="department" [(ngModel)]="myDepartment">
 
-    <select *ngIf="myDepartment; else allDepts" [(ngModel)]="disSelected" name="dis">
+    <select *ngIf="myDepartment; else allDepts" [(ngModel)]="disSelected" name="dis" (ngModelChange)="change($event)">
       <option>---</option>
       <option  *ngFor="let discipline of filterDisciplines()"
                [value] = 'discipline.name'
       >{{discipline.name}}</option>
     </select>
-    <button type="button" (click)="toggler()">Select</button>
+    <button type="button" (click)="toggler()">Show/hide</button>
 
 
     <ng-template #allDepts>
-      <select name = "dis" [(ngModel)]="disSelected">
+      <select name = "dis" [(ngModel)]="disSelected" (ngModelChange)="change($event)">
         <option>---</option>
         <option  *ngFor="let discipline of disciplines"
                  [value] = 'discipline.name'
@@ -26,7 +26,6 @@
 
   <div class="information" id="information" *ngIf="toggle">
     <div *ngFor="let discipline of showInfo()">
-      <p>{{noneSelected}}</p>
       <p>Id: {{discipline.id}}</p>
       <p>Name: {{discipline.name}}</p>
       <p>Department: {{discipline.department}}</p>

@@ -18,7 +18,6 @@ export class AppComponent {
   myDepartment: boolean;
   disSelected: any;
   toggle = false;
-  noneSelected: boolean;
 
 
 
@@ -32,5 +31,12 @@ export class AppComponent {
 
   showInfo(): any{
     return this.disciplines.filter(x => x.name === this.disSelected);
+  }
+
+  change(event: any): void{
+    console.log(event + ' changed');
+    if (event === '---'){
+      this.toggle = false;
+    }
   }
 }
